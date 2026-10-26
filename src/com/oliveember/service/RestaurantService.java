@@ -28,16 +28,16 @@ public class RestaurantService {
     // Fixed Menu Catalog (authoritative source of items and prices)
     // -----------------------------------------------------------------------
     private static final MenuItem[] MENU = {
-        new MenuItem(1,  "Woodfired Margherita",     "Artisanal Pizzas", "San Marzano tomatoes, fresh buffalo mozzarella, fragrant sweet basil, extra virgin olive oil.", 380),
-        new MenuItem(2,  "Ember Roasted Flatbread",  "Artisanal Pizzas", "Charred bell peppers, zucchini ribbons, kalamata olives, crumbled feta cheese, dried oregano.", 360),
-        new MenuItem(3,  "Truffle Mushroom Risotto", "Main Course",      "Slow-simmered Carnaroli rice, wild porcini mushrooms, black truffle oil, aged parmesan reggiano.", 420),
-        new MenuItem(4,  "Four Cheese Ravioli",      "Main Course",      "Handmade egg pasta filled with ricotta, fontina, gorgonzola in velvety sage brown butter.", 460),
-        new MenuItem(5,  "Rosemary Garlic Focaccia", "Starters",         "Warm house-baked sourdough focaccia topped with sea salt, garden rosemary, and whipped herb butter.", 240),
-        new MenuItem(6,  "Smoked Burrata Salad",     "Starters",         "Creamy burrata heart, heirloom baby tomatoes, wild rocket arugula, aged Modena balsamic reduction.", 340),
-        new MenuItem(7,  "Classic Tiramisu",         "Desserts",         "Espresso-dipped savoiardi ladyfingers, rich mascarpone mousse, dusted with dark cocoa powder.", 280),
-        new MenuItem(8,  "Warm Olive Oil Cake",      "Desserts",         "Infused with citrus zest and almond essence, served with Madagascar vanilla bean gelato.", 260),
-        new MenuItem(9,  "Hibiscus Sparkler",        "Beverages",        "Cold-steeped wild hibiscus flowers, fresh lime juice, crushed mint sprigs, and soda fizz.", 180),
-        new MenuItem(10, "Cardamom Cold Brew",       "Beverages",        "Single-origin cold brew steeped 18 hours with green cardamom pods and raw cane sugar.", 200),
+        new MenuItem(1,  "Woodfired Margherita",     "Artisanal Pizzas", "San Marzano tomatoes, fresh buffalo mozzarella, fragrant sweet basil, extra virgin olive oil.", 380, "/images/margherita.jpg"),
+        new MenuItem(2,  "Ember Roasted Flatbread",  "Artisanal Pizzas", "Charred bell peppers, zucchini ribbons, kalamata olives, crumbled feta cheese, dried oregano.", 360, "/images/flatbread.jpg"),
+        new MenuItem(3,  "Truffle Mushroom Risotto", "Main Course",      "Slow-simmered Carnaroli rice, wild porcini mushrooms, black truffle oil, aged parmesan reggiano.", 420, "/images/risotto.jpg"),
+        new MenuItem(4,  "Four Cheese Ravioli",      "Main Course",      "Handmade egg pasta filled with ricotta, fontina, gorgonzola in velvety sage brown butter.", 460, "/images/ravioli.jpg"),
+        new MenuItem(5,  "Rosemary Garlic Focaccia", "Starters",         "Warm house-baked sourdough focaccia topped with sea salt, garden rosemary, and whipped herb butter.", 240, "/images/focaccia.jpg"),
+        new MenuItem(6,  "Smoked Burrata Salad",     "Starters",         "Creamy burrata heart, heirloom baby tomatoes, wild rocket arugula, aged Modena balsamic reduction.", 340, "/images/burrata.jpg"),
+        new MenuItem(7,  "Classic Tiramisu",         "Desserts",         "Espresso-dipped savoiardi ladyfingers, rich mascarpone mousse, dusted with dark cocoa powder.", 280, "/images/tiramisu.jpg"),
+        new MenuItem(8,  "Warm Olive Oil Cake",      "Desserts",         "Infused with citrus zest and almond essence, served with Madagascar vanilla bean gelato.", 260, "/images/cake.jpg"),
+        new MenuItem(9,  "Hibiscus Sparkler",        "Beverages",        "Cold-steeped wild hibiscus flowers, fresh lime juice, crushed mint sprigs, and soda fizz.", 180, "/images/hibiscus.jpg"),
+        new MenuItem(10, "Cardamom Cold Brew",       "Beverages",        "Single-origin cold brew steeped 18 hours with green cardamom pods and raw cane sugar.", 200, "/images/coldbrew.jpg"),
     };
 
     // -----------------------------------------------------------------------

@@ -49,6 +49,7 @@ public class Main {
         MIME_TYPES.put("png",  "image/png");
         MIME_TYPES.put("jpg",  "image/jpeg");
         MIME_TYPES.put("jpeg", "image/jpeg");
+        MIME_TYPES.put("webp", "image/webp");
         MIME_TYPES.put("gif",  "image/gif");
         MIME_TYPES.put("ico",  "image/x-icon");
         MIME_TYPES.put("txt",  "text/plain; charset=UTF-8");
@@ -255,6 +256,7 @@ public class Main {
                   .append(",\"category\":\"").append(escapeJson(m.getCategory())).append("\"")
                   .append(",\"description\":\"").append(escapeJson(m.getDescription())).append("\"")
                   .append(",\"price\":").append(m.getPrice())
+                  .append(",\"imageUrl\":\"").append(escapeJson(m.getImageUrl())).append("\"")
                   .append("}");
             }
             sb.append("]");

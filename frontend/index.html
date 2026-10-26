@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Olive & Ember &mdash; Restaurant Order Management System</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <!-- Toast Notification Container -->
   <div id="toast-container" class="toast-container" aria-live="polite"></div>
@@ -13,7 +15,8 @@
   <!-- Mobile Top Bar -->
   <header class="mobile-topbar">
     <button id="mobile-menu-btn" class="icon-btn" aria-label="Toggle Navigation Menu">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
         <line x1="3" y1="12" x2="21" y2="12"></line>
         <line x1="3" y1="6" x2="21" y2="6"></line>
         <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -34,8 +37,9 @@
     <aside id="sidebar" class="sidebar">
       <div class="sidebar-header">
         <div class="brand-logo-wrap">
-          <svg class="brand-leaf-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2L15 8L21 9L17 14L18 20L12 17L6 20L7 14L3 9L9 8L12 2Z" fill="#B85D3F" stroke="#B85D3F"/>
+          <svg class="brand-leaf-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M12 2L15 8L21 9L17 14L18 20L12 17L6 20L7 14L3 9L9 8L12 2Z" fill="#B85D3F" stroke="#B85D3F" />
           </svg>
           <div>
             <h1 class="brand-name">Olive & Ember</h1>
@@ -46,7 +50,8 @@
 
       <nav class="sidebar-nav" aria-label="Main Navigation">
         <button class="nav-item active" data-view="overview">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="3" width="7" height="7"></rect>
             <rect x="14" y="3" width="7" height="7"></rect>
             <rect x="14" y="14" width="7" height="7"></rect>
@@ -56,7 +61,8 @@
         </button>
 
         <button class="nav-item" data-view="new-order">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <circle cx="9" cy="21" r="1"></circle>
             <circle cx="20" cy="21" r="1"></circle>
             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -65,7 +71,8 @@
         </button>
 
         <button class="nav-item" data-view="kitchen">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
             <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
             <line x1="6" y1="1" x2="6" y2="4"></line>
@@ -76,7 +83,8 @@
         </button>
 
         <button class="nav-item" data-view="history">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"></circle>
             <polyline points="12 6 12 12 16 14"></polyline>
           </svg>
@@ -85,12 +93,12 @@
       </nav>
 
       <div class="sidebar-footer">
-        <div class="tech-card">
-          <div class="tech-card-header">
-            <span class="tech-dot"></span>
-            <span class="tech-title">Java 17 Live API</span>
+        <div class="station-status-box">
+          <div class="station-status-header">
+            <span class="status-indicator-dot online"></span>
+            <span class="station-status-title">Olive &amp; Ember POS</span>
           </div>
-          <p class="tech-desc">Phase 4 &bull; Full Kitchen FIFO Queue + Station Workflow</p>
+          <p class="station-status-desc">Terminal #01 &bull; System Active</p>
         </div>
       </div>
     </aside>
@@ -102,7 +110,8 @@
         <div class="header-left">
           <span class="badge badge-muted">POS TERMINAL #01</span>
           <h2 id="page-title" class="page-title">Restaurant Overview</h2>
-          <p id="page-subtitle" class="page-subtitle">Real-time operational snapshot of active orders and kitchen queue status.</p>
+          <p id="page-subtitle" class="page-subtitle">Real-time operational snapshot of active orders and kitchen queue
+            status.</p>
         </div>
         <div class="header-right">
           <div class="system-status-chip">
@@ -128,7 +137,7 @@
             <div class="card kpi-card">
               <span class="kpi-label">Kitchen Queue</span>
               <span id="kpi-queue-count" class="kpi-value text-amber">0</span>
-              <span class="kpi-hint">Pending FIFO dispatch</span>
+              <span class="kpi-hint">Awaiting preparation</span>
             </div>
 
             <div class="card kpi-card">
@@ -156,7 +165,7 @@
             </div>
           </div>
 
-          <!-- Overview Lower Grid: Activity & DSA Architecture -->
+          <!-- Overview Lower Grid: Activity & Quick Operations -->
           <div class="overview-lower-grid">
             <!-- Recent Activity List -->
             <div class="card activity-card">
@@ -167,42 +176,64 @@
               <div id="overview-activity-list" class="activity-list"></div>
             </div>
 
-            <!-- DSA Architecture Guide -->
-            <div class="card dsa-guide-card">
+            <!-- Quick Operations & Station Status -->
+            <div class="card quick-actions-card">
               <div class="card-header">
-                <h3 class="section-title">DSA Operational Principles</h3>
-                <span class="badge badge-sage">Academic Mini-Project</span>
+                <h3 class="section-title">Quick Operations</h3>
+                <span class="badge badge-sage">Station Ready</span>
               </div>
-              <div class="dsa-points">
-                <div class="dsa-point">
-                  <span class="dsa-badge">FIFO</span>
-                  <div>
-                    <h4>Kitchen Queue (LinkedOrderQueue)</h4>
-                    <p>New tickets enqueue at the Rear. The chef always dequeues from the Front. Both operations operate in O(1) time without java.util collections.</p>
+              <div class="quick-actions-body">
+                <button class="quick-action-btn" onclick="document.querySelector('[data-view=\'new-order\']').click()">
+                  <div class="quick-action-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="9" cy="21" r="1"></circle>
+                      <circle cx="20" cy="21" r="1"></circle>
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
                   </div>
-                </div>
+                  <div class="quick-action-text">
+                    <strong>Take New Order</strong>
+                    <span>Browse menu &amp; build cart</span>
+                  </div>
+                  <span class="quick-action-arrow">&rarr;</span>
+                </button>
 
-                <div class="dsa-point">
-                  <span class="dsa-badge">LIFO</span>
-                  <div>
-                    <h4>Cart Undo Mechanism (LinkedCartActionStack)</h4>
-                    <p>Every quantity modification pushes a snapshot to top. Clicking Undo pops the top action and restores previous state in O(1) time.</p>
+                <button class="quick-action-btn" onclick="document.querySelector('[data-view=\'kitchen\']').click()">
+                  <div class="quick-action-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                      <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                      <line x1="6" y1="1" x2="6" y2="4"></line>
+                      <line x1="10" y1="1" x2="10" y2="4"></line>
+                      <line x1="14" y1="1" x2="14" y2="4"></line>
+                    </svg>
                   </div>
-                </div>
+                  <div class="quick-action-text">
+                    <strong>Kitchen Queue Display</strong>
+                    <span>Manage live preparation</span>
+                  </div>
+                  <span class="quick-action-arrow">&rarr;</span>
+                </button>
 
-                <div class="dsa-point">
-                  <span class="dsa-badge">STATE</span>
-                  <div>
-                    <h4>Single-Active Station Workflow</h4>
-                    <p>Orders advance strictly through PREPARING &rarr; READY &rarr; COMPLETED. No second order can begin until the active ticket finishes.</p>
+                <button class="quick-action-btn" onclick="document.querySelector('[data-view=\'history\']').click()">
+                  <div class="quick-action-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
                   </div>
-                </div>
+                  <div class="quick-action-text">
+                    <strong>Order History Log</strong>
+                    <span>Review completed orders</span>
+                  </div>
+                  <span class="quick-action-arrow">&rarr;</span>
+                </button>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- ==================== PAGE B: NEW ORDER (Phase 3 &mdash; Live Java API) ==================== -->
+        <!-- ==================== PAGE B: NEW ORDER ==================== -->
         <section id="view-new-order" class="view-section">
           <div class="new-order-layout">
             <!-- Left: Catalog Area -->
@@ -228,7 +259,7 @@
 
               <!-- Menu Items Grid &mdash; populated dynamically by app.js via /api/menu -->
               <div class="menu-grid" id="menu-items-grid">
-                <div class="menu-loading-msg">Loading menu from Java server&#8230;</div>
+                <div class="menu-loading-msg">Loading artisanal menu&#8230;</div>
               </div>
             </div>
 
@@ -238,7 +269,7 @@
                 <div class="cart-header">
                   <div>
                     <h3 class="section-title">Current Order Cart</h3>
-                    <p class="cart-sub">Managed by Java RestaurantService</p>
+                    <p class="cart-sub">Live Order Summary</p>
                   </div>
                   <span id="cart-badge" class="badge badge-amber">Empty</span>
                 </div>
@@ -266,7 +297,7 @@
                     <span id="bill-subtotal">&#8377;0</span>
                   </div>
                   <div class="bill-row text-muted">
-                    <span>GST (0% In-Memory)</span>
+                    <span>Taxes (Included)</span>
                     <span>&#8377;0</span>
                   </div>
                   <div class="bill-divider"></div>
@@ -280,7 +311,8 @@
                 <div class="cart-actions">
                   <div class="secondary-actions">
                     <button id="undo-btn" class="btn btn-secondary" disabled>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
                         <polyline points="1 4 1 10 7 10"></polyline>
                         <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
                       </svg>
@@ -290,9 +322,8 @@
                   </div>
 
                   <button id="place-order-btn" class="btn btn-primary btn-block">
-                    Place Order &amp; Enqueue Ticket
+                    Place Order
                   </button>
-                  <p class="cart-footnote">Orders enqueue into Java <strong>LinkedOrderQueue</strong> (FIFO).<br>Undo powered by <strong>LinkedCartActionStack</strong> (LIFO).</p>
                 </div>
               </div>
             </div>
@@ -302,29 +333,26 @@
         <!-- ==================== PAGE C: KITCHEN ==================== -->
         <section id="view-kitchen" class="view-section">
           <div class="kitchen-layout">
-            <!-- Left: Pending FIFO Queue -->
+            <!-- Left: Pending Queue -->
             <div class="card kitchen-queue-card">
               <div class="card-header">
                 <div>
                   <h3 class="section-title">Pending Orders Queue</h3>
-                  <p class="section-sub">FIFO Ticket Dispatching (LinkedOrderQueue)</p>
+                  <p class="section-sub">Incoming Orders Awaiting Preparation</p>
                 </div>
                 <span id="kitchen-queue-badge" class="badge badge-amber">0 in Queue</span>
               </div>
 
               <!-- Queue Visual Info -->
               <div class="queue-meta-bar">
-                <span class="badge badge-sage">FIFO Order Rule</span>
-                <span class="text-muted text-sm">Front tickets dequeue first; new arrivals enter at Rear</span>
+                <span class="badge badge-sage">Order Priority</span>
+                <span class="text-muted text-sm">Orders are prepared in order of customer placement</span>
               </div>
 
               <!-- Pending Tickets List (Dynamically populated from /api/kitchen) -->
               <div id="kitchen-queue-list" class="queue-tickets-list"></div>
 
-              <div id="queue-footer-info" class="queue-footer-info">
-                <span>Front pointer: None</span>
-                <span>Rear pointer: None</span>
-              </div>
+              <div id="queue-footer-info" class="queue-footer-info" style="display:none;"></div>
             </div>
 
             <!-- Right: Active Station -->
@@ -332,7 +360,7 @@
               <div class="card-header">
                 <div>
                   <h3 class="section-title">Active Preparation Station</h3>
-                  <p class="section-sub">Single-order workflow constraint</p>
+                  <p class="section-sub">Current active kitchen station</p>
                 </div>
                 <span id="active-station-badge" class="badge badge-muted">IDLE</span>
               </div>
@@ -343,13 +371,14 @@
               <!-- Action Controls -->
               <div class="station-actions">
                 <button id="btn-start-order" class="btn btn-primary btn-block btn-action" data-action="start-order">
-                  &#9654; Start Next Order (Dequeue Front)
+                  &#9654; Start Next Order
                 </button>
                 <div class="station-secondary-actions">
-                  <button id="btn-mark-ready" class="btn btn-secondary btn-action" data-action="mark-ready" disabled>Mark as Ready</button>
-                  <button id="btn-complete-order" class="btn btn-secondary btn-action" data-action="complete-order" disabled>Complete Order</button>
+                  <button id="btn-mark-ready" class="btn btn-secondary btn-action" data-action="mark-ready"
+                    disabled>Mark as Ready</button>
+                  <button id="btn-complete-order" class="btn btn-secondary btn-action" data-action="complete-order"
+                    disabled>Complete Order</button>
                 </div>
-                <p class="cart-footnote">Queue advancement (FIFO dequeue) &amp; state transitions managed by Java <strong>LinkedOrderQueue</strong>.</p>
               </div>
             </div>
           </div>
@@ -361,10 +390,11 @@
             <div class="card-header history-header">
               <div>
                 <h3 class="section-title">Session Order Audit Log</h3>
-                <p class="section-sub">Permanent record of all orders placed in this in-memory session.</p>
+                <p class="section-sub">Audit log of all orders placed during this session.</p>
               </div>
               <div class="history-filter-wrap">
-                <input type="text" id="history-search" class="history-search-input" placeholder="Search order ID or items..." aria-label="Search order history">
+                <input type="text" id="history-search" class="history-search-input"
+                  placeholder="Search order ID or items..." aria-label="Search order history">
                 <span id="history-count-badge" class="badge badge-muted">0 Orders</span>
               </div>
             </div>
@@ -397,4 +427,5 @@
 
   <script src="app.js"></script>
 </body>
+
 </html>

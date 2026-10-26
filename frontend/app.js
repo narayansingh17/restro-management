@@ -37,11 +37,11 @@ const VIEW_METADATA = {
   },
   "kitchen": {
     title: "Kitchen Station Workflow",
-    subtitle: "FIFO ticket dispatching powered by LinkedOrderQueue. Active single-station progression."
+    subtitle: "Live kitchen ticket management and order preparation workflow."
   },
   "history": {
     title: "Session Order History",
-    subtitle: "Permanent audit log of all orders placed during this runtime session."
+    subtitle: "Audit log of all orders placed during this session."
   }
 };
 
@@ -217,7 +217,7 @@ function renderDashboard(data) {
     listEl.innerHTML = `
       <div class="station-idle-box" style="margin:var(--space-md) 0;">
         <p>No session orders placed yet.</p>
-        <span class="text-sm">Navigate to <strong>New Order</strong> to create and enqueue kitchen tickets.</span>
+        <span class="text-sm">Navigate to <strong>New Order</strong> to create and send orders to the kitchen.</span>
       </div>
     `;
     return;
@@ -259,17 +259,30 @@ function initNewOrderPage() {
   initCartActions();
 }
 
+const MENU_STOCK_IMAGES = {
+  1: "/images/margherita.jpg",
+  2: "/images/flatbread.jpg",
+  3: "/images/risotto.jpg",
+  4: "/images/ravioli.jpg",
+  5: "/images/focaccia.jpg",
+  6: "/images/burrata.jpg",
+  7: "/images/tiramisu.jpg",
+  8: "/images/cake.jpg",
+  9: "/images/hibiscus.jpg",
+  10: "/images/coldbrew.jpg"
+};
+
 async function loadMenu() {
   const grid = document.getElementById("menu-items-grid");
   if (!grid) return;
 
-  grid.innerHTML = `<div class="menu-loading-msg">Loading menu from Java server…</div>`;
+  grid.innerHTML = `<div class="menu-loading-msg">Loading artisanal menu…</div>`;
   try {
     const items = await apiFetch("/api/menu");
     renderMenuGrid(items);
   } catch (err) {
     grid.innerHTML = `<div class="menu-loading-msg text-terracotta">Could not load menu: ${escapeHtml(err.message)}</div>`;
-    showToast("Failed to load menu from Java server.", "error");
+    showToast("Failed to load menu from server.", "error");
   }
 }
 
@@ -286,9 +299,13 @@ function renderMenuGrid(items) {
     card.className = "card menu-card";
     card.dataset.category = catSlug;
     card.dataset.id = item.id;
+    const imgUrl = item.imageUrl || MENU_STOCK_IMAGES[item.id] || "/images/margherita.jpg";
     card.innerHTML = `
+      <div class="menu-card-img-wrap">
+        <img src="${escapeHtml(imgUrl)}" alt="${escapeHtml(item.name)}" class="menu-card-img" loading="lazy" onerror="this.onerror=null;this.src='/images/margherita.jpg';">
+        <span class="menu-card-category-badge badge badge-sage">${escapeHtml(item.category.toUpperCase())}</span>
+      </div>
       <div class="menu-card-body">
-        <span class="badge badge-sage">${escapeHtml(item.category.toUpperCase())}</span>
         <h4 class="menu-card-title">${escapeHtml(item.name)}</h4>
         <p class="menu-card-desc">${escapeHtml(item.description)}</p>
       </div>
@@ -365,10 +382,14 @@ function renderCartItems(items) {
   items.forEach(item => {
     const row = document.createElement("div");
     row.className = "cart-item";
+    const imgUrl = MENU_STOCK_IMAGES[item.menuItemId] || "/images/margherita.jpg";
     row.innerHTML = `
-      <div class="cart-item-info">
-        <p class="cart-item-name">${escapeHtml(item.name)}</p>
-        <span class="cart-item-unit">₹${item.unitPrice} each</span>
+      <div class="cart-item-left">
+        <img src="${escapeHtml(imgUrl)}" class="cart-item-thumb" alt="${escapeHtml(item.name)}" onerror="this.style.display='none'">
+        <div class="cart-item-info">
+          <p class="cart-item-name">${escapeHtml(item.name)}</p>
+          <span class="cart-item-unit">₹${item.unitPrice} each</span>
+        </div>
       </div>
       <div class="cart-item-controls">
         <button class="qty-btn" data-dec-id="${item.menuItemId}" aria-label="Decrease ${escapeHtml(item.name)}">−</button>
@@ -423,7 +444,7 @@ function initCartActions() {
       try {
         const cart = await postForm("/api/cart/undo");
         renderCart(cart);
-        showToast("Last cart change undone (LinkedCartActionStack popped).", "info");
+        showToast("Last cart change undone.", "info");
       } catch (err) {
         showToast(err.message || "Nothing to undo.", "info");
       }
@@ -453,7 +474,7 @@ async function handlePlaceOrder() {
   try {
     const order = await postForm("/api/orders");
     showToast(
-      `✓ Order #${order.orderId} placed — ₹${order.totalAmount} — Enqueued into kitchen (LinkedOrderQueue).`,
+      `✓ Order #${order.orderId} placed (₹${order.totalAmount}) and sent to kitchen.`,
       "success"
     );
     showOrderConfirmation(order);
@@ -513,13 +534,10 @@ function renderKitchen(data) {
 
   const footerInfo = document.getElementById("queue-footer-info");
   if (footerInfo) {
-    footerInfo.innerHTML = `
-      <span>Front pointer: ${frontId ? '#' + frontId : 'None'}</span>
-      <span>Rear pointer: ${rearId ? '#' + rearId : 'None'}</span>
-    `;
+    footerInfo.innerHTML = "";
   }
 
-  // 2. Pending Tickets List (FIFO)
+  // 2. Pending Tickets List
   const queueList = document.getElementById("kitchen-queue-list");
   if (queueList) {
     queueList.innerHTML = "";
@@ -532,7 +550,7 @@ function renderKitchen(data) {
             <line x1="15" y1="9" x2="9" y2="15"></line>
           </svg>
           <p>Kitchen queue is currently empty.</p>
-          <span class="text-sm">Place an order in <strong>New Order</strong> to enqueue tickets into LinkedOrderQueue.</span>
+          <span class="text-sm">Place an order in <strong>New Order</strong> to send tickets to the kitchen.</span>
         </div>
       `;
     } else {
@@ -542,13 +560,13 @@ function renderKitchen(data) {
 
         let tagBadge = "";
         if (isFront && isRear) {
-          tagBadge = `<span class="badge badge-front">[FRONT &amp; REAR]</span>`;
+          tagBadge = `<span class="badge badge-front">NEXT UP</span>`;
         } else if (isFront) {
-          tagBadge = `<span class="badge badge-front">[FRONT - NEXT DISPATCH]</span>`;
+          tagBadge = `<span class="badge badge-front">NEXT UP</span>`;
         } else if (isRear) {
-          tagBadge = `<span class="badge badge-rear">[REAR - LAST ADDED]</span>`;
+          tagBadge = `<span class="badge badge-rear">NEWEST</span>`;
         } else {
-          tagBadge = `<span class="badge badge-muted">POS #${index + 1}</span>`;
+          tagBadge = `<span class="badge badge-muted">#${index + 1} In Line</span>`;
         }
 
         const itemsList = order.items
@@ -675,7 +693,7 @@ function renderKitchen(data) {
             <polyline points="12 6 12 12 16 14"></polyline>
           </svg>
           <p>Station Idle — No order in preparation.</p>
-          <span class="text-sm">Click <strong>Start Next Order</strong> to dequeue the front ticket from LinkedOrderQueue.</span>
+          <span class="text-sm">Click <strong>Start Next Order</strong> to begin preparation.</span>
         </div>
       `;
     }
@@ -697,7 +715,7 @@ function initKitchenActions() {
       btnStart.disabled = true;
       try {
         const order = await postJson("/api/kitchen/start-next");
-        showToast(`✓ Order #${order.orderId} dequeued from LinkedOrderQueue into station (PREPARING).`, "success");
+        showToast(`✓ Order #${order.orderId} moved to station (PREPARING).`, "success");
         await loadKitchen();
         loadDashboard();
       } catch (err) {
